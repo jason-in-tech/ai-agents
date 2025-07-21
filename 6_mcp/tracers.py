@@ -15,6 +15,7 @@ def make_trace_id(tag: str) -> str:
     random_suffix = ''.join(secrets.choice(ALPHANUM) for _ in range(pad_len))
     return f"trace_{tag}{random_suffix}"
 
+# make a subclass of TracingProcessor (from OpenAI)
 class LogTracer(TracingProcessor):
 
     def get_name(self, trace_or_span: Trace | Span) -> str | None:

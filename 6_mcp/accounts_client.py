@@ -1,3 +1,7 @@
+# this file set up the MCP client
+# it will be used to call the MCP server
+# but OpenAI SDK already set up the MCP client for us
+# so this file is no longer needed in the future
 import mcp
 from mcp.client.stdio import stdio_client
 from mcp import StdioServerParameters

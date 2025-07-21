@@ -22,8 +22,11 @@ class EngineeringTeam():
         return Agent(
             config=self.agents_config['backend_engineer'],
             verbose=True,
+            # allow agent to execute code
             allow_code_execution=True,
-            code_execution_mode="safe",  # Uses Docker for safety
+            # execute code in a docker container for safety
+            code_execution_mode="safe",  
+            # max execution time for the code
             max_execution_time=500, 
             max_retry_limit=3 
         )

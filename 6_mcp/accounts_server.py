@@ -66,5 +66,7 @@ async def read_strategy_resource(name: str) -> str:
     account = Account.get(name.lower())
     return account.get_strategy()
 
+# need this to run the MCP server
 if __name__ == "__main__":
+    # run the MCP server and set the transport mechanism to stdio
     mcp.run(transport='stdio')

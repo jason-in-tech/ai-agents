@@ -1,3 +1,15 @@
+"""
+This is a simple chatbot that uses the OpenAI API to answer questions.
+It uses the OpenAI API to generate a response to the user's question.
+It also uses the OpenAI API to call tools to record user details and unknown questions.
+
+run the app:
+cd 1_foundations
+uv run app.py
+
+deploy the app: see 4_lab4.ipynb for instructions
+"""
+
 from dotenv import load_dotenv
 from openai import OpenAI
 import json

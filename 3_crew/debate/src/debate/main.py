@@ -17,11 +17,13 @@ def run():
     """
     Run the crew.
     """
+    # put in the template values set in the tasks.yaml file
     inputs = {
         'motion': 'There needs to be strict laws to regulate LLMs',
     }
     
     try:
+        # print the result of each crew
         result = Debate().crew().kickoff(inputs=inputs)
         print(result.raw)
     except Exception as e:

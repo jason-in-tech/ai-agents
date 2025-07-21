@@ -8,6 +8,12 @@ INSTRUCTIONS = (
     "essence and ignore any fluff. Do not include any additional commentary other than the summary itself."
 )
 
+# With search_context_size="low"
+# Sources Retrieved: 2-3 basic web pages
+# With search_context_size="medium"
+# Sources Retrieved: 5-7 basic web pages
+# With search_context_size="high"
+# Sources Retrieved: 10-15 basic web pages
 search_agent = Agent(
     name="Search agent",
     instructions=INSTRUCTIONS,

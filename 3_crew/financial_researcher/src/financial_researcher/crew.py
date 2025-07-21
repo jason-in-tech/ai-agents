@@ -12,6 +12,7 @@ class ResearchCrew():
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
+            # use serper dev tool to search the web
             tools=[SerperDevTool()]
         )
 

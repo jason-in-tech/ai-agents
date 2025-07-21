@@ -39,6 +39,7 @@ class StockPicker():
 
     @agent
     def trending_company_finder(self) -> Agent:
+        # want trending company finder to have memory such that it won't search for the same company twice
         return Agent(config=self.agents_config['trending_company_finder'],
                      tools=[SerperDevTool()], memory=True)
     
@@ -49,6 +50,7 @@ class StockPicker():
 
     @agent
     def stock_picker(self) -> Agent:
+        # want stock picker to have memory such that it won't recommend the same stock twice
         return Agent(config=self.agents_config['stock_picker'], 
                      tools=[PushNotificationTool()], memory=True)
     
@@ -72,24 +74,28 @@ class StockPicker():
             config=self.tasks_config['pick_best_company'],
         )
     
-
-
-
     @crew
     def crew(self) -> Crew:
         """Creates the StockPicker crew"""
-
+        # manager agent is used to manage the crew
+        # it is not defined as @agent, so it is not a crew member
+        # it is used to manage the crew and not do the work
         manager = Agent(
             config=self.agents_config['manager'],
+            # allow the manager agent to delegate tasks to the crew members
+            # this is equivalent to the handoffs in the sales agent example (in Openai SDK)
             allow_delegation=True
         )
             
         return Crew(
             agents=self.agents,
             tasks=self.tasks, 
+            # we are using a manager agent to figure out which agent does which task
             process=Process.hierarchical,
             verbose=True,
+            # pass the manager agent to the crew
             manager_agent=manager,
+            # turn memory on
             memory=True,
             # Long-term memory for persistent storage across sessions
             long_term_memory = LongTermMemory(
@@ -109,7 +115,8 @@ class StockPicker():
                         type="short_term",
                         path="./memory/"
                     )
-                ),            # Entity memory for tracking key information about entities
+                ),            
+            # Entity memory for tracking key information about entities
             entity_memory = EntityMemory(
                 storage=RAGStorage(
                     embedder_config={
